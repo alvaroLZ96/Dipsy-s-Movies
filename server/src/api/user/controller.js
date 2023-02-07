@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
           email: userInfo.email,
         },
         req.app.get('secretKey'),
-        { expiresIn: '10h' }
+        { expiresIn: '3h' }
       );
       return res.json({
         status: 200,
