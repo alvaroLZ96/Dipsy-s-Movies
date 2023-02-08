@@ -3,6 +3,10 @@ import { createContext, useState } from 'react'
 const GlobalContext = createContext()
 
 const GlobalContextProvider = ({ children }) => {
+  const [jwt, setJwt] = useState(() => {
+    const savedJwt = localStorage.getItem('token')
+    return savedJwt || null
+  })
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user')
     const initialValue = JSON.parse(savedUser)
@@ -14,7 +18,7 @@ const GlobalContextProvider = ({ children }) => {
 
     return user || initialValue
   })
-  const value = { isLogged, setIsLogged, user, setUser }
+  const value = { isLogged, setIsLogged, user, setUser, jwt, setJwt }
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
   )

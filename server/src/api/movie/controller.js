@@ -35,12 +35,7 @@ const getPopular = async (req, res) => {
 const getCredits = async (req, res) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${req.params.id}/credits`,
-      {
-        params: {
-          api_key: 'your-api-key',
-        },
-      }
+      `https://api.themoviedb.org/3/movie/${req.params.movie_id}/credits?api_key=${process.env.API_KEY}&language=es-ES`
     );
 
     return res.json(response.data);

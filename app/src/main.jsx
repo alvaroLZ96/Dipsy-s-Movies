@@ -8,39 +8,42 @@ import NowMovies from './pages/NowMovies/NowMovies'
 import PopularMovies from './pages/PopularMovies/PopularMovies'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
+import { GlobalContextProvider } from './context/GlobalContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route
-          index
-          element={
-            <RequiredAuth>
-              <Home />
-            </RequiredAuth>
-          }
-        />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route
-          path="movies/popular"
-          element={
-            <RequiredAuth>
-              <PopularMovies />
-            </RequiredAuth>
-          }
-        />
-        <Route
-          path="movies/now-playing"
-          element={
-            <RequiredAuth>
-              <NowMovies />
-            </RequiredAuth>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <GlobalContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route
+            index
+            element={
+              <RequiredAuth>
+                <Home />
+              </RequiredAuth>
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route
+            path="movies/popular"
+            element={
+              <RequiredAuth>
+                <PopularMovies />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="movies/now-playing"
+            element={
+              <RequiredAuth>
+                <NowMovies />
+              </RequiredAuth>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </GlobalContextProvider>
   </React.StrictMode>
 )

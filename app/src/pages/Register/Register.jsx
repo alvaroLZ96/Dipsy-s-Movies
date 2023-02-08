@@ -1,17 +1,111 @@
-import { useForm } from 'react-hook-form'
+import { useState, useContext } from 'react'
+import { useForm, FormProvider } from 'react-hook-form'
+import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { API } from '../../services/API'
 import Toast from '../../utils/Toast'
+import { API } from '../../services/API'
+import UIFormInput from '../../components/UIFormInput'
+import { NavItemLink } from '../../components/NavItemLink'
+import { myTheme } from '../../components/Theme/Theme'
+import styled from 'styled-components'
 
-const RegisterForm = () => {
-  const { handleSubmit, register, errors } = useForm()
+const FormContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`
+
+const MainDiv = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`
+
+const AlignCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+`
+
+const InputBox = styled(AlignCenter)`
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+  }
+`
+
+const Password = styled(AlignCenter)`
+  position: relative;
+
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+  }
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 22px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #333;
+  }
+`
+const SubmitButton = styled.button`
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  background: rgb(255, 255, 255);
+  color: blueviolet;
+  border-radius: 0.5rem;
+  border-bottom: 2px solid blueviolet;
+  border-right: 2px solid blueviolet;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transition-duration: 0.3s;
+  transition-property: border-top, border-left, border-bottom, border-right,
+    box-shadow;
+
+  :hover {
+    border-top: 2px solid blueviolet;
+    border-left: 2px solid blueviolet;
+    border-bottom: 2px solid rgb(238, 103, 238);
+    border-right: 2px solid rgb(238, 103, 238);
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 8px 8px,
+      rgba(240, 46, 170, 0.2) 10px 10px;
+  }
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const ExistingDiv = styled.div`
+  font-size: 12px;
+`
+
+const Register = () => {
   const navigate = useNavigate()
+  const methods = useForm()
+  const [show, setShow] = useState(false)
+  const toggleShow = (ev) => {
+    ev.preventDefault()
+    setShow(!show)
+  }
 
   const onSubmit = (data) => {
     API.post('/users/register', data)
       .then((res) => {
         if (res.data.status === 201 || res.data.status === 200) {
-          navigate('/')
+          navigate('/login') //MIRAR PARA CAMBIAR
           return (
             <Toast title="Usuario registrado correctamente" type="success" />
           )
@@ -28,53 +122,100 @@ const RegisterForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Nombre"
-        ref={register({ required: true })}
-      />
-      {errors.name && <span>Este campo es requerido</span>}
-
-      <input
-        type="text"
-        name="lastName"
-        placeholder="Apellidos"
-        ref={register({ required: true })}
-      />
-      {errors.lastName && <span>Este campo es requerido</span>}
-
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        ref={register({ required: true })}
-      />
-      {errors.email && <span>Este campo es requerido</span>}
-
-      <input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        ref={register({ required: true })}
-      />
-      {errors.password && <span>Este campo es requerido</span>}
-
-      <input
-        type="date"
-        name="birthdate"
-        placeholder="Fecha de nacimiento"
-        ref={register({ required: true })}
-      />
-      {errors.birthdate && <span>Este campo es requerido</span>}
-
-      <button type="submit">Registrarse</button>
-      <button type="button" onClick={() => navigate('/login')}>
-        Ya estoy registrado
-      </button>
-    </form>
+    <FormContainer>
+      <MainDiv>
+        <FormProvider {...methods}>
+          <Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <InputBox>
+              <UIFormInput
+                name="name"
+                placeholder="Nombre"
+                validations={{
+                  required: 'Este campo es requerido'
+                }}
+              />
+            </InputBox>
+            <InputBox>
+              <UIFormInput
+                name="surname"
+                placeholder="Apellidos"
+                validations={{
+                  required: 'Este campo es requerido'
+                }}
+              />
+            </InputBox>
+            <InputBox>
+              <UIFormInput
+                name="email"
+                placeholder="Email"
+                validations={{
+                  required: 'Este campo es requerido',
+                  minLength: {
+                    value: 2,
+                    message: 'Necesita un minimo de 2 caracteres'
+                  },
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Dirección de e-mail incorrecta'
+                  }
+                }}
+              />
+            </InputBox>
+            <Password>
+              <UIFormInput
+                name="password"
+                type={show ? 'text' : 'password'}
+                placeholder="******"
+                validations={{
+                  required: 'Este campo es requerido',
+                  minLength: {
+                    value: 6,
+                    message: 'Este campo debe tener al menos 6 caracteres'
+                  },
+                  pattern: {
+                    value: /^\S*$/,
+                    message: 'El formato no es correcto'
+                  },
+                  validate: {
+                    format: (password) => {
+                      return (
+                        (/[A-Z]/g.test(password) &&
+                          /[a-z]/g.test(password) &&
+                          /[0-9]/g.test(password)) ||
+                        'La contraseña debe contener al menos una mayúscula, una minúscula y un número'
+                      )
+                    }
+                  }
+                }}
+              />
+              <button className="passwordBtn" onClick={(ev) => toggleShow(ev)}>
+                {show ? <BsEyeSlash /> : <BsEye />}
+              </button>
+            </Password>
+            <InputBox>
+              <UIFormInput
+                name="birthdate"
+                type="date"
+                placeholder="Fecha de nacimiento"
+                validations={{
+                  required: 'Este campo es requerido'
+                }}
+              />
+            </InputBox>
+            <SubmitButton type="submit">Registrarse</SubmitButton>
+            <ExistingDiv>
+              Si ya tienes cuenta puedes entrar{' '}
+              <NavItemLink
+                name="aquí"
+                href="/login"
+                hoverColor={myTheme.colors.primary}
+              />
+            </ExistingDiv>
+          </Form>
+        </FormProvider>
+      </MainDiv>
+    </FormContainer>
   )
 }
 
-export default RegisterForm
+export default Register

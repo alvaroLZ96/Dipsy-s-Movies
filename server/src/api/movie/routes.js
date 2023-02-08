@@ -5,6 +5,6 @@ const { isAuth } = require('../../middlewares/auth');
 
 MoviesRoutes.get('/now-playing', [isAuth], getNow);
 MoviesRoutes.get('/popular', [isAuth], getPopular);
-MoviesRoutes.get('/credits', [isAuth], getCredits);
+MoviesRoutes.get('/:movie_id', [isAuth], getCredits);
 
 module.exports = MoviesRoutes;
