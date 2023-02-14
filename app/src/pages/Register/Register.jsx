@@ -27,7 +27,6 @@ const AlignCenter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 0;
 `
 
 const InputBox = styled(AlignCenter)`
@@ -52,7 +51,7 @@ const Password = styled(AlignCenter)`
   button {
     position: absolute;
     right: 10px;
-    top: 22px;
+    top: 50px;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -101,18 +100,20 @@ const Register = () => {
     setShow(!show)
   }
 
+  const [toast, setToast] = useState(null)
+
   const onSubmit = (data) => {
     API.post('/users/register', data)
       .then((res) => {
         if (res.data.status === 201 || res.data.status === 200) {
-          navigate('/login') //MIRAR PARA CAMBIAR
-          return (
+          navigate('/login')
+          setToast(
             <Toast title="Usuario registrado correctamente" type="success" />
           )
         }
       })
       .catch(() => {
-        return (
+        setToast(
           <Toast
             title="No es posible crear la cuenta. Intentalo de nuevo"
             type="error"
@@ -123,13 +124,14 @@ const Register = () => {
 
   return (
     <FormContainer>
+      {toast}
       <MainDiv>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <InputBox>
               <UIFormInput
+                label="Nombre"
                 name="name"
-                placeholder="Nombre"
                 validations={{
                   required: 'Este campo es requerido'
                 }}
@@ -137,8 +139,8 @@ const Register = () => {
             </InputBox>
             <InputBox>
               <UIFormInput
+                label="Apellidos"
                 name="surname"
-                placeholder="Apellidos"
                 validations={{
                   required: 'Este campo es requerido'
                 }}
@@ -146,8 +148,8 @@ const Register = () => {
             </InputBox>
             <InputBox>
               <UIFormInput
+                label="Email"
                 name="email"
-                placeholder="Email"
                 validations={{
                   required: 'Este campo es requerido',
                   minLength: {
@@ -163,9 +165,9 @@ const Register = () => {
             </InputBox>
             <Password>
               <UIFormInput
+                label="Contraseña"
                 name="password"
                 type={show ? 'text' : 'password'}
-                placeholder="******"
                 validations={{
                   required: 'Este campo es requerido',
                   minLength: {
@@ -194,9 +196,9 @@ const Register = () => {
             </Password>
             <InputBox>
               <UIFormInput
+                label="Feacha de nacimiento"
                 name="birthdate"
                 type="date"
-                placeholder="Fecha de nacimiento"
                 validations={{
                   required: 'Este campo es requerido'
                 }}

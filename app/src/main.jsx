@@ -4,11 +4,11 @@ import App from './App'
 import RequiredAuth from './utils/RequiredAuth'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
-import NowMovies from './pages/NowMovies/NowMovies'
-import PopularMovies from './pages/PopularMovies/PopularMovies'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import { GlobalContextProvider } from './context/GlobalContext'
+import Dashboard from './pages/Dashboard/Dashboard'
+import MovieDetail from './components/MovieDetail'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -27,18 +27,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route
-            path="movies/popular"
+            path="movies"
             element={
               <RequiredAuth>
-                <PopularMovies />
+                <Dashboard />
               </RequiredAuth>
             }
           />
           <Route
-            path="movies/now-playing"
+            path="/movies/detail"
             element={
               <RequiredAuth>
-                <NowMovies />
+                <MovieDetail />
               </RequiredAuth>
             }
           />

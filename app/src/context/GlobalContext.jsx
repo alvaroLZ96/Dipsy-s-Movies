@@ -18,7 +18,24 @@ const GlobalContextProvider = ({ children }) => {
 
     return user || initialValue
   })
-  const value = { isLogged, setIsLogged, user, setUser, jwt, setJwt }
+  const logout = () => {
+    setUser(null)
+    setJwt(null)
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+  }
+  const [selectedMovie, setSelectedMovie] = useState(null)
+  const value = {
+    isLogged,
+    setIsLogged,
+    user,
+    setUser,
+    jwt,
+    setJwt,
+    logout,
+    selectedMovie,
+    setSelectedMovie
+  }
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
   )

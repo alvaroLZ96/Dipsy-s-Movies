@@ -7,6 +7,7 @@ const ErrorStyled = styled.div`
   color: #ff3300;
   font-size: ${myTheme.fontSizes.xsm};
   margin-top: 5px;
+  max-width: 300px;
 `
 
 const FormControlStyled = styled.div`
