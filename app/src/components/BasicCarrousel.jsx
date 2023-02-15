@@ -11,63 +11,50 @@ const StyledCardListWrapper = styled.div`
   }
   @media (min-width: 600px) {
     max-width: 90%;
-    padding-bottom: 15px;
+    padding: 18px 0;
     margin: auto;
     border-radius: 20px;
+
+    .slick-slider {
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     .slick-arrow {
       display: block;
     }
   }
-  & .card {
-    margin: 10px;
-  }
 `
 const StyledSlider = styled(Slider)`
   .slick-slide {
-    filter: blur(1.5px);
     transform: scale(0.6);
-    z-index: -1;
-  }
-  .slick-center {
-    filter: blur(0px);
-    transform: scale(1);
-    z-index: 10;
-    position: relative;
   }
 `
-
-const CarrouselList = ({ movies, onLoadMore }) => {
+const BasicCarrousel = ({ movies, onLoadMore }) => {
   const settings = {
     infinite: true,
-    speed: 500,
     lazyLoad: true,
-    slidesToShow: 8,
+    slidesToShow: 6,
+    speed: 500,
     slidesToScroll: 1,
-    autoplay: false, ///////quitar al falseeeeeeeeeeeeee
-    autoplaySpeed: 2200,
-    centerPadding: '50px',
-    pauseOnHover: true,
-    centerMode: true,
     responsive: [
       {
         breakpoint: 600,
         settings: {
           arrows: false,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerPadding: '150px'
+          slidesToShow: 3,
+          slidesToScroll: 1
         }
       }
     ]
   }
-
   const handleAfterChange = (index) => {
-    if (movies.length > 0 && index === movies.length - 1) {
+    if (index + settings.slidesToShow >= movies.length) {
       onLoadMore()
     }
   }
-
   return (
     <StyledCardListWrapper>
       <StyledSlider {...settings} afterChange={handleAfterChange}>
@@ -78,4 +65,4 @@ const CarrouselList = ({ movies, onLoadMore }) => {
   )
 }
 
-export default CarrouselList
+export default BasicCarrousel

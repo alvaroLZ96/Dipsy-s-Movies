@@ -2,8 +2,10 @@ const axios = require('axios');
 
 const getNow = async (req, res, next) => {
   try {
+    const page = req.query.page || 1;
+
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}&language=es-ES`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}&language=es-ES&page=${page}`
     );
     const nowMovies = response.data.results;
     res.json({
@@ -17,8 +19,9 @@ const getNow = async (req, res, next) => {
 };
 const getPopular = async (req, res) => {
   try {
+    const page = req.query.page || 1;
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=es-ES`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=es-ES&page=${page}`
     );
     const popularMovies = response.data.results;
     res.json({
