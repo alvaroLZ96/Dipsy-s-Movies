@@ -10,21 +10,9 @@ const StyledCardListWrapper = styled.div`
     display: none;
   }
   @media (min-width: 600px) {
-    max-width: 90%;
-    padding: 18px 0;
-    margin: auto;
+    max-width: 90vw;
+    padding-left: 8%;
     border-radius: 20px;
-
-    .slick-slider {
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .slick-arrow {
-      display: block;
-    }
   }
 `
 const StyledSlider = styled(Slider)`
@@ -36,10 +24,23 @@ const BasicCarrousel = ({ movies, onLoadMore }) => {
   const settings = {
     infinite: true,
     lazyLoad: true,
-    slidesToShow: 6,
-    speed: 500,
+    slidesToShow: 7,
     slidesToScroll: 1,
     responsive: [
+      {
+        breakpoint: 1150,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1
+        }
+      },
       {
         breakpoint: 600,
         settings: {
@@ -59,7 +60,15 @@ const BasicCarrousel = ({ movies, onLoadMore }) => {
     <StyledCardListWrapper>
       <StyledSlider {...settings} afterChange={handleAfterChange}>
         {movies &&
-          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+          movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              height={380}
+              fontsize={24}
+              width={220}
+            />
+          ))}
       </StyledSlider>
     </StyledCardListWrapper>
   )

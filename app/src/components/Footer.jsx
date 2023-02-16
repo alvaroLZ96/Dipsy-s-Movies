@@ -7,6 +7,10 @@ const FooterWrapper = styled.footer`
   align-items: center;
   font-size: 1rem;
   font-weight: 500;
+  color: white;
+  text-shadow: 0 0 5px #fff, 0 0 20px #49ff18, 0 0 30px #49ff18,
+    0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18,
+    2px 2px 2px rgba(206, 89, 55, 0);
 
   img {
     height: 30px;
@@ -37,7 +41,7 @@ const Linkedin = styled.div`
   }
 
   img {
-    margin-left: 10px;
+    margin-left: 100px;
   }
 `
 
@@ -52,7 +56,7 @@ const Footer = () => (
         target="_blank"
       >
         <img
-          src="https://res.cloudinary.com/dbxcsf9hc/image/upload/v1672784109/linkedin_black_logo_icon_147114_e1swhq.png"
+          src="https://res.cloudinary.com/dbxcsf9hc/image/upload/v1676575054/linkedin-icon-18-256_r1kojb.png"
           alt="LinkedIn"
         />
       </a>

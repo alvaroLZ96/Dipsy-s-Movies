@@ -9,16 +9,21 @@ import UIFormInput from '../../components/UIFormInput'
 import { NavItemLink } from '../../components/NavItemLink'
 import { myTheme } from '../../components/Theme/Theme'
 import styled from 'styled-components'
+import Footer from '../../components/Footer'
 
 const FormContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background-image: url('https://res.cloudinary.com/dbxcsf9hc/image/upload/v1676571753/telettubie_wallpaper_h01s8q.png');
+  background-size: 25%;
 `
 
 const MainDiv = styled.div`
-  background-color: #fff;
+  background-color: #ffffff84;
+  margin: auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -230,93 +235,9 @@ const Login = () => {
           </Form>
         </FormProvider>
       </MainDiv>
+      <Footer />
     </FormContainer>
   )
 }
-
-/* return (
-    <div className="loginContainer">
-      <div className="loginPage">
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onFormSubmit)}>
-            <div className="LogoDiv">
-              <img src="https://res.cloudinary.com/dbxcsf9hc/image/upload/v1675788468/dipsy_wanq24.png" alt="Logo" />
-            </div>
-            <div className="alignCenter inputBox">
-              <UIFormInput
-                name="email"
-                placeholder="Email"
-                defaultValue={storedEmail || ''}
-                validations={{
-                  required: 'Este campo es requerido',
-                  minLength: {
-                    value: 2,
-                    message: 'Necesita un minimo de 2 caracteres'
-                  },
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Dirección de e-mail incorrecta'
-                  }
-                }}
-              />
-            </div>
-            <div className="alignCenter password">
-              <UIFormInput
-                name="password"
-                type={show ? 'text' : 'password'}
-                placeholder="******"
-                validations={{
-                  required: 'Este campo es requerido',
-                  minLength: {
-                    value: 6,
-                    message: 'Este campo debe tener al menos 6 caracteres'
-                  },
-                  pattern: {
-                    value: /^\S*$/,
-                    message: 'El formato no es correcto'
-                  },
-                  validate: {
-                    format: (password) => {
-                      return (
-                        (/[A-Z]/g.test(password) &&
-                          /[a-z]/g.test(password) &&
-                          /[0-9]/g.test(password)) ||
-                        'La contraseña debe contener al menos una mayúscula, una minúscula y un número'
-                      )
-                    }
-                  }
-                }}
-              />
-              <button className="passwordBtn" onClick={(ev) => toggleShow(ev)}>
-                {show ? <BsEyeSlash /> : <BsEye />}
-              </button>
-            </div>
-            <div className="alignCenter checkBox">
-              <div>
-                <UIFormInput name="remember" type="checkbox" />
-                <span>Remember me</span>
-              </div>
-              
-            </div>
-            <div>
-              <button className="btn" type="submit">
-                Iniciar sesión
-              </button>
-            </div>
-            <div>
-              <p>
-                Si no tienes cuenta puedes registrarte{' '}
-                <NavItemLink
-                  name="aquí"
-                  href="/register"
-                  hoverColor={myTheme.colors.primary}
-                />
-              </p>
-            </div>
-          </form>
-        </FormProvider>
-      </div>
-    </div>
-  ) */
 
 export default Login

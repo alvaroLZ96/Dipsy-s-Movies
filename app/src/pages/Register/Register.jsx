@@ -8,19 +8,24 @@ import UIFormInput from '../../components/UIFormInput'
 import { NavItemLink } from '../../components/NavItemLink'
 import { myTheme } from '../../components/Theme/Theme'
 import styled from 'styled-components'
+import Footer from '../../components/Footer'
 
 const FormContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background-image: url('https://res.cloudinary.com/dbxcsf9hc/image/upload/v1676571753/telettubie_wallpaper_h01s8q.png');
+  background-size: 25%;
 `
 
 const MainDiv = styled.div`
-  background-color: #fff;
+  background-color: #ffffff84;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
 `
 
 const AlignCenter = styled.div`
@@ -216,6 +221,7 @@ const Register = () => {
           </Form>
         </FormProvider>
       </MainDiv>
+      <Footer />
     </FormContainer>
   )
 }

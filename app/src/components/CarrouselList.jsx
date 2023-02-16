@@ -6,21 +6,12 @@ import 'slick-carousel/slick/slick-theme.css'
 
 const StyledCardListWrapper = styled.div`
   max-width: 90vw;
-  .slick-arrow {
-    display: none;
-  }
+  padding-right: 10px;
+
   @media (min-width: 600px) {
-    max-width: 90%;
+    max-width: 90vw;
     padding-bottom: 15px;
     margin: auto;
-    border-radius: 20px;
-
-    .slick-arrow {
-      display: block;
-    }
-  }
-  & .card {
-    margin: 10px;
   }
 `
 const StyledSlider = styled(Slider)`
@@ -39,17 +30,26 @@ const StyledSlider = styled(Slider)`
 
 const CarrouselList = ({ movies, onLoadMore }) => {
   const settings = {
+    className: 'center',
     infinite: true,
     speed: 500,
     lazyLoad: true,
-    slidesToShow: 8,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: false, ///////quitar al falseeeeeeeeeeeeee
     autoplaySpeed: 2200,
-    centerPadding: '50px',
+    centerPadding: '100px',
     pauseOnHover: true,
     centerMode: true,
     responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          centerPadding: '100px'
+        }
+      },
       {
         breakpoint: 600,
         settings: {
@@ -72,7 +72,15 @@ const CarrouselList = ({ movies, onLoadMore }) => {
     <StyledCardListWrapper>
       <StyledSlider {...settings} afterChange={handleAfterChange}>
         {movies &&
-          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+          movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              height={330}
+              fontsize={14}
+              width={200}
+            />
+          ))}
       </StyledSlider>
     </StyledCardListWrapper>
   )

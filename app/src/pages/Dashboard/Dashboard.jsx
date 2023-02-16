@@ -7,7 +7,6 @@ import Footer from '../../components/Footer'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  width: 100vw;
   display: flex;
   flex-direction: column;
 `
@@ -24,8 +23,11 @@ const Text = styled.div`
     11px 11px 0 #513d3a, 12px 12px 0 #57293e, 0px 0px 20px rgba(0, 0, 0, 0.2),
     2px 2px 2px rgba(22, 237, 22, 0.7);
 `
-
+const SyncronyzeDiv = styled.div`
+  margin: 0 auto;
+`
 const Button = styled.button`
+  overflow: auto;
   margin: 10px auto;
   height: 40px;
   cursor: pointer;
@@ -104,7 +106,9 @@ const Dashboard = () => {
   return (
     <Wrapper>
       <Header />
-      <Button onClick={updateMovies} />
+      <SyncronyzeDiv>
+        <Button onClick={updateMovies} />
+      </SyncronyzeDiv>
       <Text>En cines</Text>
       <CarrouselList
         movies={nowPlayingMovies}
