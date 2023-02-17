@@ -2,10 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import GlobalContext from '../context/GlobalContext'
 import { Navigate } from 'react-router-dom'
 import styled from 'styled-components'
-import {
-  LazyLoadComponent,
-  LazyLoadImage
-} from 'react-lazy-load-image-component'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { API } from '../services/API'
 
 const Container = styled.div`

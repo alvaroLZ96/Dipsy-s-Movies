@@ -36,7 +36,7 @@ const CarrouselList = ({ movies, onLoadMore }) => {
     lazyLoad: true,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: false, ///////quitar al falseeeeeeeeeeeeee
+    autoplay: true,
     autoplaySpeed: 2200,
     centerPadding: '100px',
     pauseOnHover: true,

@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-/* import LayoutWrapper from '../../components/Layout/LayoutWrapper' */
 import GlobalContext from '../../context/GlobalContext'
 import Dashboard from '../Dashboard/Dashboard'
 
@@ -8,9 +7,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <LayoutWrapper> */}
       <div className="HomeDiv">{isLogged && <Dashboard />}</div>
-      {/*  </LayoutWrapper> */}
     </>
   )
 }
