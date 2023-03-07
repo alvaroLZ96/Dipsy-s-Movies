@@ -3,13 +3,13 @@ En este proyecto el usuario puede desde acceder a su espacio personal registrán
 
 Nos conectamos a una base de datos para almacenar los datos de estos usuarios e implementamos lazy load en la carga de las imágenes. Igualmente el usuario puede sincronizar las películas mostradas. 
 
-Todas las rutas se encuentran autenticadas y se puede acceder a la vista detalle de cada una de las películas, así como existe una API que nos permite el acceso privado a app.
+Todas las rutas se encuentran autenticadas y se puede acceder a la vista detalle de cada una de las películas, así como existe una API que nos permite el acceso privado a la app.
 
 En este caso hemos implementado distintas tecnologías: 
 - React (+react-dom y react-router-dom) es el eje de nuestra aplicación como librería de Javascript para aportar sencillez y optimización de nuestra interfaz. 
 - Para los estilos nos valemos de Styled Components buscando que nuestro código sea más compacto e intuitivo.
 - React-hook-form nos sirve para construir nuestros formularios de inicio de sesión y nos permite manejar más fácilmente la validación, el envío y el estado de los mismos.
-- React-lazy-load es nuestra herramienta para optimizar el rendimiento  de la web.
+- React-lazy-load es nuestra herramienta para optimizar el rendimiento de la web.
 - React-slick es la biblioteca que utilizamos para mediante carruseles darle un aspecto adecuado dada la temática.
 
 
