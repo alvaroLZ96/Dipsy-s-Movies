@@ -14,5 +14,5 @@ const apiHeaders = {
 export const API = axios.create({
   headers: apiHeaders,
   timeout: 6000,
-  baseURL: 'https://dipsy-s-movies-production.up.railway.app'
+  baseURL: 'http://dipsy-s-movies-production.up.railway.app/api'
 })
