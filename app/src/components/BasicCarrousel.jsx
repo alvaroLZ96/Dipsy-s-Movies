@@ -35,17 +35,17 @@ const BasicCarrousel = ({ movies, onLoadMore }) => {
         }
       },
       {
-        breakpoint: 900,
+        breakpoint: 800,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 500,
         settings: {
           arrows: false,
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1
         }
       }
